@@ -6,7 +6,7 @@ or "Export timeline data" from mobile Google Maps and converts it into other for
 
 ## Fork
 This is a fork of the original [script](https://github.com/Scarygami/location-history-json-converter), created by: [Scarygami](https://github.com/Scarygami).  
-Added support for new export timeline format produces by mobile Google Maps application.
+Added support for new timeline format produces by mobile Google Maps application (On Android go to Settings->Location->Location Services->Time Line->Export Timeline Data).
 
 ### Requirements
 
