@@ -2,15 +2,19 @@
 
 This Python script takes the JSON file of your location history which you can get via
 [Google Takeout](https://takeout.google.com/settings/takeout/custom/location_history)
-and converts it into other formats.
+or "Export timeline data" from mobile Google Maps and converts it into other formats.
+
+## Fork
+This is a fork of the original [script](https://github.com/Scarygami/location-history-json-converter), created by: [Scarygami](https://github.com/Scarygami).  
+Added support for new export timeline format produces by mobile Google Maps application.
 
 ### Requirements
 
 *  [Install python](https://wiki.python.org/moin/BeginnersGuide/Download) (3.2+) if you don't have it installed already.
 
 *  Download the python script by either cloning this repository
-   (`git clone https://github.com/Scarygami/location-history-json-converter`)
-   or [downloading the script file](https://raw.githubusercontent.com/Scarygami/location-history-json-converter/master/location_history_json_converter.py).
+   (`git clone https://github.com/Tuzhilin/location-history-json-converter`)
+   or [downloading the script file](https://raw.githubusercontent.com/Tuzhilin/location-history-json-converter/master/location_history_json_converter.py).
 
 *  Install dependencies using `pip install -r requirements.txt`
 
