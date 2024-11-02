@@ -1,7 +1,7 @@
 *.json
 *.gpx
 *.kml
-*.json
 *.js
 *.gpxtracks
 *.csv
+/.idea/

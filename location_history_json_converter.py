@@ -26,7 +26,6 @@ from argparse import ArgumentParser, ArgumentTypeError
 from datetime import datetime
 from datetime import timedelta
 from dateutil.parser import isoparse
-from dateutil.tz import UTC
 
 try:
     import ijson
@@ -465,7 +464,7 @@ def main():
 
     arg_parser.add_argument(
         "-c", "--chronological",
-        help="Sort items in chronological order (might be unnessary)",
+        help="Sort items in chronological order (might be unnecessary)",
         action="store_true"
     )
 
@@ -526,7 +525,7 @@ def main():
             print("-----------------------------------")
             print("Please note that iterative mode doesn't really work when chronological is activated,")
             print("since all locations need to be fetched first to be able to sort them.")
-            print("The setting might also be unnessary since recent Google Takeout data already seems properly sorted.")
+            print("The setting might also be unnecessary since recent Google Takeout data already seems properly sorted.")
             print("")
             print("If you need to use this setting you can instead create a smaller JSON file")
             print("using jsonfull format with filters for start date, end date and accuracy in iterative mode:")
@@ -551,7 +550,7 @@ def main():
 
     else:
         try:
-            with open(args.input, "r") as f:
+            with open(args.input, "r", encoding='utf-8') as f:
                 json_data = f.read()
         except OSError as error:
             print("Error opening input file %s: %s" % (args.input, error))
@@ -566,7 +565,21 @@ def main():
             print("Error decoding json: %s" % error)
             return
 
-        items = data["locations"]
+        if "locations" in data:
+            items = data["locations"]
+        elif "semanticSegments" in data:
+            items = []
+            for r in data['semanticSegments']:
+                for point in r.get('timelinePath',[]):
+                    latlng = point['point'].replace('°', '').split(',')
+                    items.append({
+                        'latitudeE7': float(latlng[0])*10000000,
+                        'longitudeE7': float(latlng[1].strip())*10000000,
+                        'timestamp': point['time']
+                    })
+        else:
+            print("Unsupported input JSON file format!")
+            return
 
     try:
         f_out = open(args.output, "w")
